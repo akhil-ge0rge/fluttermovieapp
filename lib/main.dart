@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttermovieapp/utils/text.dart';
+import 'package:fluttermovieapp/widgets/toprated.dart';
+import 'package:fluttermovieapp/widgets/trending.dart';
+import 'package:fluttermovieapp/widgets/tv.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 
 void main() {
@@ -60,15 +64,22 @@ class _HomeState extends State<Home> {
       topratedmovies = topratedresults['results'];
       tv = tvresults['results'];
     });
-    print(trendingmovies);
   }
 
   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text("Movie App"),
+        title: modified_text(text: 'Movie App', color: Colors.blue, size: 20),
+      ),
+      body: ListView(
+        children: [
+          TV(tvshows: tv),
+          TopRated(toprated: topratedmovies),
+          TrendingMovies(trending: trendingmovies),
+        ],
       ),
     );
   }
